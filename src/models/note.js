@@ -1,4 +1,4 @@
-import mongoose, { Schema } from 'mongoose';
+import { Schema, model } from 'mongoose';
 import { docToJson } from '../utils';
 
 const noteSchema = new Schema({
@@ -18,4 +18,4 @@ const noteSchema = new Schema({
         transform: docToJson
     }
 });
-export const Note = mongoose.model('Note', noteSchema);
+export const Note = model('Note', noteSchema);

@@ -1,4 +1,4 @@
-import mongoose, { Schema } from 'mongoose';
+import { Schema, model } from 'mongoose';
 import validator from 'validator';
 
 const userSchema = new Schema({
@@ -9,7 +9,7 @@ const userSchema = new Schema({
     username: {
         type: String,
         required: true,
-        unique : true
+        unique: true
     },
     email: {
         type: String,
@@ -24,7 +24,9 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    resetToken: String,
+    resetTokenExpiresIn: Date
 });
 
-export const User = mongoose.model('User', userSchema);
+export const User = model('User', userSchema);

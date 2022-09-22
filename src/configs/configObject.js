@@ -3,6 +3,6 @@ dotenv.config();
 
 export const config = Object.freeze({
     mongoUrl: process.env.MONGO_URL,
-    jwtRefreshToken: process.env.JWT_REFRESH_TOKEN,
+    jwtAccessToken: process.env.JWT_ACCESS_TOKEN,
     jwtResetToken: process.env.JWT_RESET_TOKEN
 });

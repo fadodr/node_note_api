@@ -30,11 +30,8 @@ export const controllerHandler = (controllerFn, valSchema) => {
                 res.status(200).send({ status: true });
                 return;
             }
-            res.status(result.code ?? 200).json({
-                status: true,
-                message: result.message,
-                data: result.data
-            });
+            const { code, ...data } = result;
+            res.status(code ?? 200).json({ data });
         } catch (error) {
             next(error);
         }    
