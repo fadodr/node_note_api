@@ -6,15 +6,16 @@ import { UnAuthorizedError } from "../../errors";
 export const login = async ({ input }) => {
   const { email, password } = input;
 
-  let user = await User.findOne({ email });
+    let user = await User.findOne({ email });
+    
 
-  if (!user || !compareData(user.password, password))
-    throw UnAuthorizedError("Invalid email or password");
-
+  if (!user || !compareData(password, user.password))
+    throw new UnAuthorizedError("Invalid email or password");
+    
   const tokenInfo = {
     payload: { id: user.id },
     secret: config.jwtAccessToken,
-    expiresIn: 86400000,
+    expiresIn: 86400,
   };
   const token = generateAccessToken(tokenInfo);
 

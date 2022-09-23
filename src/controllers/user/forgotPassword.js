@@ -1,25 +1,25 @@
 import { User } from "../../models";
-import { dateToString, generateRandStr, computeDate } from "../../utils";
+import { generateRandStr, computeDate } from "../../utils";
 import { NotFoundError } from "../../errors";
 
 export const forgotPwd = async ({ input }) => {
   const { email } = input;
   const user = await User.findOne({ email });
-  if (!user) throw NotFoundError("Email does not exist");
+  if (!user) throw new NotFoundError("Email does not exist");
 
   const resetToken = generateRandStr(8);
   const updateDetails = {
     resetToken,
-    resetTokenExpiresIn: 900000,
+    resetTokenExpiresIn: computeDate(900),
   };
-  await user.update(updateDetails);
+    await User.updateOne({ id: user.id }, updateDetails);
 
   return {
     code: 200,
     message: "kindly use the token below to reset your password",
     data: {
-      token,
-      expiresIn: dateToString(updateDetails.resetTokenExpiresIn),
+      token: resetToken,
+      expiresIn: updateDetails.resetTokenExpiresIn.toISOString(),
       email,
     },
   };

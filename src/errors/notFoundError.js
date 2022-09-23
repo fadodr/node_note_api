@@ -4,15 +4,15 @@ export class NotFoundError extends ApiError {
   constructor(message) {
     super(message);
 
-    this.message = message ?? 'Not Found';
-    this.statusCode = 404;
+    this._message = message ?? "Not Found";
+    this._statusCode = 404;
   }
 
-  message() {
-    return this.message;
+  get message() {
+    return this._message;
   }
 
-  statusCode() {
-    return this.statusCode;
+  get statusCode() {
+    return this._statusCode;
   }
 }

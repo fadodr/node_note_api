@@ -5,3 +5,4 @@ export * from './bcrypt';
 export * from './jwt';
 export * from './computeDate';
 export * from './randomString';
+export * from './permission';

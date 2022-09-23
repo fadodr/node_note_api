@@ -4,15 +4,15 @@ export class UnProcessableError extends ApiError {
   constructor(message) {
     super(message);
 
-    this.message = message ?? "Unprocessable Entity";
-    this.statusCode = 422;
+    this._message = message ?? "Unprocessable Entity";
+    this._statusCode = 422;
   }
 
-  message() {
-    return this.message;
+  get message() {
+    return this._message;
   }
 
-  statusCode() {
-    return this.statusCode;
+  get statusCode() {
+    return this._statusCode;
   }
 }

@@ -6,9 +6,9 @@ export const resetPwd = async ({ input }) => {
   const { token, password } = input;
 
   let user = await User.findOne({ token });
-  if (!user) throw UnAuthorizedError("invalid or expired token");
+  if (!user) throw new UnAuthorizedError("invalid or expired token");
   if (user.resetTokenExpiresIn <= Date.now())
-    throw UnAuthorizedError("invalid or expired token");
+    throw new UnAuthorizedError("invalid or expired token");
 
   const hashPwd = await hashData(password);
   user = await user.update({

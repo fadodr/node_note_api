@@ -17,11 +17,11 @@ import {
   forgotPwdValSchema,
 } from "../validations";
 
-router.post("signup", controllerHandler(signup, signupValSchema));
-router.post("login", controllerHandler(login, loginValSchema));
-router.post("forgotpassword", controllerHandler(forgotPwd, forgotPwdValSchema));
-router.post("resetpassword", controllerHandler(resetPwd, resetPwdValSchema));
-router.post("refreshtoken", controllerHandler(refreshToken));
-router.delete("logout", controllerHandler(logout));
+router.post("/signup", controllerHandler(signup, signupValSchema));
+router.post("/login", controllerHandler(login, loginValSchema));
+router.post("/forgotpassword", controllerHandler(forgotPwd, forgotPwdValSchema));
+router.post("/resetpassword", controllerHandler(resetPwd, resetPwdValSchema));
+router.post("/refreshtoken", controllerHandler(refreshToken));
+router.delete("/logout", controllerHandler(logout));
 
 export default router;

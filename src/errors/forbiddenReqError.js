@@ -4,15 +4,15 @@ export class ForbiddenReqError extends ApiError {
   constructor(message) {
     super(message);
 
-    this.message = message ?? "Forbidden";
-    this.statusCode = 403;
+    this._message = message ?? "Forbidden";
+    this._statusCode = 403;
   }
 
-  message() {
-    return this.message;
+  get message() {
+    return this._message;
   }
 
-  statusCode() {
-    return this.statusCode;
+  get statusCode() {
+    return this._statusCode;
   }
 }

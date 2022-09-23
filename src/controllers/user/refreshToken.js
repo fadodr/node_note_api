@@ -1,5 +1,9 @@
 import { BlackListToken } from "../../models";
-import { ForbiddenReqError, UnAuthorizedError } from "../../errors";
+import {
+  ForbiddenReqError,
+  UnAuthorizedError,
+  BadReqError,
+} from "../../errors";
 import {
   generateAccessToken,
   verifyToken,
@@ -9,15 +13,16 @@ import {
 import { config } from "../../configs";
 
 export const refreshToken = async ({ headers }) => {
-  const authorization = headers["Authorization"];
+  const authorization = headers["authorization"];
+  if (!authorization) throw new BadReqError("Header is missing");
   let token = authorization.split(" ")[1];
-  if (!token) throw ForbiddenReqError("Bearer token is missing");
+  if (!token) throw new ForbiddenReqError("Bearer token is missing");
 
   const isBlackListed = await BlackListToken.findOne({ token });
-  if (isBlackListed) throw UnAuthorizedError("Token expired");
+  if (isBlackListed) throw new UnAuthorizedError("Token expired");
 
   const tokenDetails = verifyToken(token, config.jwtAccessToken);
-  if (!tokenDetails) throw UnAuthorizedError("Token expired");
+  if (!tokenDetails) throw new UnAuthorizedError("Token expired");
 
   const { id, exp } = tokenDetails;
 
@@ -29,7 +34,7 @@ export const refreshToken = async ({ headers }) => {
   const tokenInfo = {
     payload: { id },
     secret: config.jwtAccessToken,
-    expiresIn: 86400000,
+    expiresIn: 86400,
   };
   token = generateAccessToken(tokenInfo);
   return {

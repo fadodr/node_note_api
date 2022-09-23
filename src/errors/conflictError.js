@@ -4,15 +4,15 @@ export class ConflictError extends ApiError {
   constructor(message) {
     super(message);
 
-    this.message = message ?? "Conflict";
-    this.statusCode = 409;
+    this._message = message ?? "Conflict";
+    this._statusCode = 409;
   }
 
-  message() {
-    return this.message;
+  get message() {
+    return this._message;
   }
 
-  statusCode() {
-    return this.statusCode;
+  get statusCode() {
+    return this._statusCode;
   }
 }

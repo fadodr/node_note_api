@@ -6,11 +6,11 @@ export const signup = async ({ input }) => {
   const { name, username, email, password } = input;
 
   const existEmail = await User.findOne({ email });
-  if (existEmail) throw ConflictError("Email already exist");
+  if (existEmail) throw new ConflictError("Email already exist");
 
   const existUsername = await User.findOne({ username });
   if (existUsername)
-    throw ConflictError(
+    throw new ConflictError(
       "Username already exist, please enter another username"
     );
 

@@ -11,27 +11,28 @@ function getControllerArgs(req) {
 } 
 
 export const controllerHandler = (controllerFn, valSchema) => {
-    return (req, res, next) => {
+    return async (req, res, next) => {
         const controllerArgs = getControllerArgs(req);
 
         try {
            if (valSchema) {
-                const { input } = controllerArgs;
-                const { inputValSchema } = valSchema;
+               const { input, params }  = controllerArgs;
+               const { inputVal, paramsVal } = valSchema;
 
                 try {
-                    if (inputValSchema) joiValidate(inputValSchema, input);
+                    if (inputVal) joiValidate(inputVal, input);
+                    if (paramsVal) joiValidate(paramsVal, params);
                 } catch (error) {
                     throw new UnProcessableError(error.message);
                 }
             } 
-            const result = controllerFn(controllerArgs);
+            const result = await controllerFn(controllerArgs);
             if (result == undefined) {
                 res.status(200).send({ status: true });
                 return;
             }
             const { code, ...data } = result;
-            res.status(code ?? 200).json({ data });
+            res.status(code ?? 200).send({ data });
         } catch (error) {
             next(error);
         }    

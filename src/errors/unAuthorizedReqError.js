@@ -4,15 +4,15 @@ export class UnAuthorizedError extends ApiError {
   constructor(message) {
     super(message);
 
-    this.message = message ?? "Unauthorized";
-    this.statusCode = 401;
+    this._message = message ?? "Unauthorized";
+    this._statusCode = 401;
   }
 
-  message() {
-    return this.message;
+  get message() {
+    return this._message;
   }
 
-  statusCode() {
-    return this.statusCode;
+  get statusCode() {
+    return this._statusCode;
   }
 }

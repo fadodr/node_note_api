@@ -4,15 +4,15 @@ export class BadReqError extends ApiError{
     constructor(message) {
         super(message);
 
-        this.message = message ?? 'Bad Request';
-        this.statusCode = 400;
+        this._message = message ?? 'Bad Request';
+        this._statusCode = 400;
     }
 
-    message() {
-        return this.message;
+    get message() {
+        return this._message;
     }
 
-    statusCode() {
-        return this.statusCode;
+    get statusCode() {
+        return this._statusCode;
     }
 }
