@@ -6,9 +6,10 @@ function getControllerArgs(req) {
         input: req.body,
         params: req.params,
         query: req.query,
-        headers: req.headers
+        headers: req.headers,
+        user : req.user
     };
-} 
+};
 
 export const controllerHandler = (controllerFn, valSchema) => {
     return async (req, res, next) => {

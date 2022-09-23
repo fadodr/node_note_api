@@ -3,8 +3,9 @@ const router = Router();
 
 import userRoute from './user';
 import noteRoute from './note';
+import { isAuth } from '../middleware';
 
 router.use('/user', userRoute);
-router.use('/note', noteRoute);
+router.use('/note', isAuth, noteRoute);
 
 export default router;

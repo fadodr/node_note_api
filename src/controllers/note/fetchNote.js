@@ -1,5 +1,6 @@
 import { Note } from "../../models";
-import { NotFoundError, UnAuthorizedError } from "../../errors";
+import { NotFoundError } from "../../errors";
+import { checkIfCanAlterNote } from "../../utils";
 
 export const fetchNote = async ({ params, user }) => {
   const { noteId } = params;

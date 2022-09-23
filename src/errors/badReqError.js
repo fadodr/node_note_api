@@ -15,4 +15,4 @@ export class BadReqError extends ApiError{
     get statusCode() {
         return this._statusCode;
     }
-}
+};

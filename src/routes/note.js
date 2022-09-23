@@ -20,7 +20,7 @@ import {
 router.post("/", controllerHandler(createNote, createNoteValSchema));
 router.get("/", controllerHandler(fetchAllNotes));
 router.get("/:noteId", controllerHandler(fetchNote, fetchNoteValSchema));
-router.patch("/", controllerHandler(updateNote, updateNoteValSchema));
-router.delete("/", controllerHandler(deleteNote, deleteNoteValSchema));
+router.patch("/:noteId", controllerHandler(updateNote, updateNoteValSchema));
+router.delete("/:noteId", controllerHandler(deleteNote, deleteNoteValSchema));
 
 export default router;

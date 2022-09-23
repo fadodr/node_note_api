@@ -23,8 +23,14 @@ export const fetchNoteValSchema = {
 
 export const updateNoteValSchema = {
   inputVal: joi.object().keys({
-    title: joi.string().allow(null),
-    description: joi.string().allow(null),
+    title: joi
+      .string()
+      .allow(null)
+      .messages({ "string.base": "title must be a string" }),
+    description: joi
+      .string()
+      .allow(null)
+      .messages({ "string.base": "description must be a string" }),
   }),
   paramsVal: joi.object().keys({
     noteId: joi.objectId().required().messages({
