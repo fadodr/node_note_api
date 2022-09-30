@@ -11,8 +11,19 @@ export const apiErrorHandler = (error, req, res, next) => {
   }
   
   if (statusCode == 500) logger.error(error);
-  return res.status(statusCode).send({
-    status: false,
-    error: message,
-  });
+  let errorObj;
+  if (error.details) {
+    errorObj = {
+      status: false,
+      error: message,
+      details: error.details,
+    }
+  }
+  else {
+    errorObj = {
+      status: false,
+      error: message,
+    };
+  }
+  return res.status(statusCode).send(errorObj);
 };

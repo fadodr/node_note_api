@@ -24,7 +24,7 @@ export const controllerHandler = (controllerFn, valSchema) => {
                     if (inputVal) joiValidate(inputVal, input);
                     if (paramsVal) joiValidate(paramsVal, params);
                 } catch (error) {
-                    throw new UnProcessableError(error.message);
+                    throw new UnProcessableError(error.details);
                 }
             } 
             const result = await controllerFn(controllerArgs);

@@ -6,6 +6,7 @@ export class NotFoundError extends ApiError {
 
     this._message = message ?? "Not Found";
     this._statusCode = 404;
+    this._details = null;
   }
 
   get message() {
@@ -14,5 +15,9 @@ export class NotFoundError extends ApiError {
 
   get statusCode() {
     return this._statusCode;
+  }
+
+  get details() {
+     return this._details;
   }
 }

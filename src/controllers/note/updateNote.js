@@ -12,7 +12,6 @@ export const updateNote = async ({ input, params, user }) => {
 
   checkIfCanAlterNote(note, userId);
   const newNote = await Note.findByIdAndUpdate(noteId, { title, description });
-  console.log(newNote);
 
   note = await Note.findById(noteId).populate("author", "id username email");
   return {

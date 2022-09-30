@@ -6,6 +6,7 @@ export class ConflictError extends ApiError {
 
     this._message = message ?? "Conflict";
     this._statusCode = 409;
+    this._details = null;
   }
 
   get message() {
@@ -14,5 +15,9 @@ export class ConflictError extends ApiError {
 
   get statusCode() {
     return this._statusCode;
+  }
+
+  get details() {
+     return this._details;
   }
 }

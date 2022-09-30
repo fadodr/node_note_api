@@ -6,6 +6,7 @@ export class UnAuthorizedError extends ApiError {
 
     this._message = message ?? "Unauthorized";
     this._statusCode = 401;
+    this._details = null;
   }
 
   get message() {
@@ -14,5 +15,9 @@ export class UnAuthorizedError extends ApiError {
 
   get statusCode() {
     return this._statusCode;
+  }
+
+  get details() {
+     return this._details;
   }
 }

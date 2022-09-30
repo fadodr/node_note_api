@@ -1,7 +1,7 @@
+import { Redshift } from "aws-sdk";
 import { Note } from "../../models";
 
 export const createNote = async ({ input, user }) => {
-    console.log(user);
     const { title, description } = input;
     const userId = user.id;
 

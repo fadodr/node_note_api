@@ -1,10 +1,23 @@
 import { ApiError } from "./apiError";
 
-export class UnProcessableError extends ApiError {
-  constructor(message) {
-    super(message);
+function parseValidationError(details) {
+  console.log(details)
+  return details.map(({ message, path }) => {
+    return {
+      message : message.replaceAll('\"', ''),
+      path: path.join('.')
+    }
+  });
+};
 
-    this._message = message ?? "Unprocessable Entity";
+export class UnProcessableError extends ApiError {
+  constructor(details) {
+    super("Invalid input");
+
+    this._message = "Invalid input"
+    this._details = {
+      fields: parseValidationError(details)
+    };
     this._statusCode = 422;
   }
 
@@ -14,5 +27,9 @@ export class UnProcessableError extends ApiError {
 
   get statusCode() {
     return this._statusCode;
+  }
+
+  get details() {
+    return this._details;
   }
 }

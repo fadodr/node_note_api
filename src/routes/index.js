@@ -6,6 +6,6 @@ import noteRoute from './note';
 import { isAuth } from '../middleware';
 
 router.use('/user', userRoute);
-router.use('/note', isAuth, noteRoute);
+router.use('/note', noteRoute);
 
 export default router;

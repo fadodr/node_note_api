@@ -6,6 +6,7 @@ export class ForbiddenReqError extends ApiError {
 
     this._message = message ?? "Forbidden";
     this._statusCode = 403;
+    this._details = null;
   }
 
   get message() {
@@ -14,5 +15,9 @@ export class ForbiddenReqError extends ApiError {
 
   get statusCode() {
     return this._statusCode;
+  }
+
+  get details() {
+     return this._details;
   }
 }
