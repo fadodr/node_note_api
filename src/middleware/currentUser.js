@@ -1,7 +1,8 @@
 import { verifyToken } from '../utils';
-import { config } from '../configs';
+import { config }  from '../configs/configObject';
+import { ForbiddenReqError } from '../errors';
 
-export const currentUser = async (req, res, next) => {
+export const currentUser = (req, res, next) => {
     const tokenHeader = req.get('Authorization');
     if (!tokenHeader) {
         req.user = null;
@@ -11,11 +12,11 @@ export const currentUser = async (req, res, next) => {
     let tokenDetails;
     try {
         tokenDetails = verifyToken(token, config.jwtAccessToken);
-    } catch (error) {
+    } catch (err) {
         req.user = null;
+        const error = new ForbiddenReqError(err.message)
         return next(error);
     }
-
     req.user = tokenDetails;
     next();
-}
+};

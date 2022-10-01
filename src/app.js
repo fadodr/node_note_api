@@ -13,6 +13,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(currentUser);
 app.use('/api', router);
 
+app.use('*', (req, res) => {
+    res.send({ message: 'done yesss' });
+});
+
 app.use(apiErrorHandler);
 
 app.listen(3000, () => {
