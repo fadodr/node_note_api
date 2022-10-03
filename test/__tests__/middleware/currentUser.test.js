@@ -1,6 +1,6 @@
 import { afterEach, expect, jest } from "@jest/globals"
-import * as jwtUtil from '../src/utils/jwt';
-import { currentUser } from "../src/middleware";
+import * as jwtUtil from '../../../src/utils/jwt';
+import { currentUser } from "../../../src/middleware";
 
 describe('Current user middleware', function () {
     afterEach(() => {

@@ -14,7 +14,7 @@ app.use(currentUser);
 app.use('/api', router);
 
 app.use('*', (req, res) => {
-    res.send({ message: 'done yesss' });
+    res.status(404).send({ error: 'Page not found' });
 });
 
 app.use(apiErrorHandler);

@@ -1,5 +1,5 @@
 import { expect, jest } from "@jest/globals";
-import { isAuth } from "../src/middleware";
+import { isAuth } from "../../../src/middleware/isAuthenticated";
 
 describe("User Authentication", function () {
     it("pass error to the next function when user is not authenticated", function () {
