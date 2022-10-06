@@ -1,8 +1,8 @@
-import { afterAll, beforeAll, describe, expect, it } from "@jest/globals";
+import { describe, expect, it } from "@jest/globals";
 import mongoose from "mongoose";
 import { createNote } from "../../../../src/controllers/note";
 
-const userId = new mongoose.Types.ObjectId();
+//const userId = new mongoose.Types.ObjectId();
 
 describe("Create note", () => {
   let validNote = {
@@ -10,15 +10,18 @@ describe("Create note", () => {
     description: "fake test description",
   };
 
+  const user = globalThis.__USER__;
+
   it("should create a note with valid fields successfully", async () => {
     const expResponse = {
       ...validNote,
-      author: "dhdhdd",
+      author: mongoose.Types.ObjectId(user.id),
+      id: expect.any(String),
+      createdAt: expect.any(Date),
+      updatedAt: expect.any(Date),
     };
-    const createdNote = await createNote({
-      input: validNote,
-      user: globalThis.__USER__,
-    });
+
+    const createdNote = await createNote({ input: validNote, user });
     expect(createdNote).toBeDefined();
     expect(createdNote).toHaveProperty("data");
     expect(createdNote.code).toBe(201);

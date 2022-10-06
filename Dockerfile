@@ -1,14 +1,14 @@
+# syntax=docker/dockerfile:1
+
 FROM node:16
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm install --production
 
 COPY . .
-
-ENV port=3000
 
 EXPOSE 3000
 
